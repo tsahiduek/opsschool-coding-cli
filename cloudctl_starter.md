@@ -1,11 +1,5 @@
 ```python
 import click
-import logging
-
-logging.basicConfig(format=(
-    '%(asctime)s %(name)-12s %(funcName)-8s %(message)s'))
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
 
 
 @click.group()
