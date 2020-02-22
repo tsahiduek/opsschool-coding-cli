@@ -96,7 +96,7 @@ Commands:
 
 Our CLI should interact with AWS API to retrieve the data it needs. In python, we have [Boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html). Boto3 is a package/SDK that already implemented and exposes many different AWS API endpoints ready for use. Instead of calling AWS API directly (and implementing all the logic that is needed around it, such as: retry, error handling, support different API endpoint, etc...), Boto3 expose to the developer set of predefined classes and functions that can be consumed very easily.
 
-Use Boto3 to implement the logic for the `get instances` command. The output should look something like this (I've used another package to make the output more "tabulate" - I leave you to google for it :-):
+Use Boto3 to implement the logic for the `get instances` command. This is a direct link to the [`describe_instances`](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_instances) command which you'll need to use for this. The output should look something like this (I've used another package to make the output more "tabulate" - I'll let you to google for it :-):
 
 ```
 (cloudctl) tsahiduek:cloudctl Tashi.Duek$ cloudctl get instances
