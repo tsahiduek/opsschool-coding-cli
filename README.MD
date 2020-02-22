@@ -7,7 +7,7 @@ We'll call this tool `cloudctl`, which will be a simplified and unified CLI to t
 
 As covered, we'll use the following tools:
 
-- [Click - Python library for CLI](https://click.palletsprojects.com/en/7.x/ "Click Homepage")
+- [Click - Python package for CLI](https://click.palletsprojects.com/en/7.x/ "Click Homepage")
 - [Virtualenv - tool for isolated python environment](https://virtualenv.pypa.io "Virtualenv RTD")
 
 ## Instructions
@@ -92,6 +92,23 @@ Commands:
   stop  stop action
 ```
 
-### Set your CLI to run from the command line
-
 ### Writing your CLI logic
+
+Our CLI should interact with AWS API to retrieve the data it needs. In python, we have [Boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html). Boto3 is a package/SDK that already implemented and exposes many different AWS API endpoints ready for use. Instead of calling AWS API directly (and implementing all the logic that is needed around it, such as: retry, error handling, support different API endpoint, etc...), Boto3 expose to the developer set of predefined classes and functions that can be consumed very easily.
+
+Use Boto3 to implement the logic for the `get instances` command. The output should look something like this (I've used another package to make the output more "tabulate" - I leave you to google for it :-):
+
+```
+(cloudctl) tsahiduek:cloudctl Tashi.Duek$ cloudctl get instances
+Id                   Name    State    name
+-------------------  ------  -------  -----------------------------------------
+i-08548cc86a6159509          running  nodes.kops.spot8s.com
+i-0a62ea0a882407d58          running  master-us-west-2b.masters.kops.spot8s.com
+i-0886cb9d63dccf69d          running  bastions.kops.spot8s.com
+i-06cc0db7be322489a          running  master-us-west-2a.masters.kops.spot8s.com
+i-076329695031a064d          running  master-us-west-2c.masters.kops.spot8s.com
+```
+
+Another note about Boto3 and its advantage:
+Take a look at the AWS guide of interacting with the AWS API _without_ Boto3 package:
+https://docs.aws.amazon.com/general/latest/gr/sigv4-signed-request-examples.html#sig-v4-examples-get-auth-header
